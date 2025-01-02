@@ -1,0 +1,13 @@
+<!-- pages/main-video/main-video.wxml-->
+<view class="video-list">
+  <block wx:for="{{videoList}}" wx:key="id">
+    <!-- 使用组件,并传递参数 -->
+    <!-- 微信的组件比较怪,他的组件内部内容是在video-item内部的,vue中这个组件名video-item是被忽略不计的,是直接把组件内容放入video-list中的,微信属于多嵌套了一层,所以在样式设计上要注意 -->
+    <!-- data-item="{{item}}" -->
+   <video-item 
+    class="video-item" 
+    itemData="{{item}}"
+    bind:tap="onVideoItemTap"
+   />
+  </block>
+</view>

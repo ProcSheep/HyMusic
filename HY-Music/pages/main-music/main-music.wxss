@@ -1,0 +1,26 @@
+/* pages/main-music/main-music.wxss */
+page{
+  background-color: #fafafa;
+  /* 方法1: 更改vant内部样式css */
+  --search-background-color: #fff;
+  --search-padding: 10px 0;
+
+  padding: 0 24rpx;
+  box-sizing: border-box;
+}
+
+/* 方法2:  */
+/* .van-search__content{
+  background-color: #fff !important;
+} */
+
+.item .image{
+  width: 100%;
+}
+
+.banner{
+  border-radius: 12rpx;
+  overflow: hidden;
+}
+
+

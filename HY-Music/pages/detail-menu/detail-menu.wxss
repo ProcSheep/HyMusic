@@ -1,0 +1,16 @@
+/* pages/detail-menu/detail-menu.wxss */
+page{
+  padding: 0 24rpx;
+  /* 不要挤出屏幕 */
+  box-sizing: border-box;
+}
+
+.list{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.list .list-item{
+  width: 48%;
+}

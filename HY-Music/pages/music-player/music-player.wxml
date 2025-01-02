@@ -1,0 +1,129 @@
+<!--pages/music-player/music-player.wxml-->
+<!-- <text>pages/music-player/music-player.wxml</text> -->
+<!-- <view>{{currentSong.name}}</view> -->
+
+<!-- 规范播放时间 -->
+<wxs src="/utils/format.wxs" module="fmt"/>
+
+<!-- 1.背景+毛玻璃 -->
+<image class="bg-image" src="{{currentSong.al.picUrl}}" mode="aspectFill" />
+<view class="bg-cover"></view>
+
+<!-- 2.自定义导航栏 -->
+<nav-bar bind:leftClick="onNavBack">
+  <!-- 可以使用插槽自定义自己想要的功能 -->
+  <view class="tabs" slot="center">
+    <!-- <view class="item {{currentPage === 0 ? 'active' : ''}}" bind:tap="onNavTabItemTap" data-index="{{0}}">歌曲</view>
+    <view class="divider">|</view>
+    <view class="item {{currentPage === 1 ? 'active' : ''}}" bind:tap="onNavTabItemTap" data-index="{{1}}">歌词</view> -->
+
+    <!-- 封装 -->
+    <block wx:for="{{pageTitles}}" wx:key="*this">
+      <view 
+        class="item {{currentPage === index ? 'active' : ''}}" 
+        bind:tap="onNavTabItemTap" 
+        data-index="{{index}}"
+      >
+        {{item}}
+      </view>
+      <view class="divider" wx:if="{{index !== pageTitles.length - 1}}">|</view>
+    </block>
+
+  </view>
+</nav-bar>
+
+<!-- 3.页面内容,使用轮播图插件来做更加方便,平滑 -->
+<!-- current: 设置swiper的页面索引index,进而控制滑动的页面是哪一个 -->
+<swiper bind:change="onSwiperChange" style="height: {{contentHeight}}px;" current="{{currentPage}}">
+  <swiper-item class="music">
+    <view class="album">
+    <!-- 封面图片 -->
+      <image class="image" src="{{currentSong.al.picUrl}}" mode="widthFix"/>
+    </view>
+
+    <view class="info">
+    <!-- 歌曲信息(名字和作者) -->
+      <view class="name">{{currentSong.name}}</view>
+      <view class="singer">{{currentSong.ar[0].name}}</view>
+    </view>
+
+    <view class="lyric">
+    <!-- 一句歌词 -->
+    {{currentLyricText}}
+    </view>
+
+    <view class="progress">
+    <!-- 歌曲时长进度条 -->
+    <!-- 滑块进度条: 微信组件slider 不会的查文档
+      block-size: 设置进度条的大小
+      value: 设置进度条的位置 比如 value={{60}} 即进度条在60%的位置
+      bindchange: 完成一次拖动后触发
+      bindchanging: 滑动过程中执行
+     -->
+    <slider 
+      block-size="12" 
+      class="slider" 
+      value="{{sliderValue}}"
+      bindchange="onSliderChange"
+      bindchanging="onSliderChanging"
+    />
+    <!-- 歌曲时间: 现在的时间/总时长 -->
+    <view class="time">
+      <view class="current">{{fmt.formatTime(currentTime)}}</view>
+      <view class="duration">{{fmt.formatTime(durationTime)}}</view>
+    </view>
+
+    </view>
+    <view class="controls">
+    <!-- 歌曲控制(多个图标) -->
+      <image 
+        class="btn mode" 
+        src="/assets/images/players/play_{{playModeName}}.png"
+        bind:tap="onModeBtnTap" 
+      />
+      <image 
+        class="btn prev" 
+        src="/assets/images/players/play_prev.png"
+        bind:tap="onPrevBtnTap"  
+      />
+      <image 
+        class="btn play" 
+        src="/assets/images/players/play_{{isPlaying ? 'pause' : 'resume'}}.png"
+        bind:tap="onPlayOrPauseTap"
+      />
+      <image 
+        class="btn next" 
+        src="/assets/images/players/play_next.png"
+        bind:tap="onNextBtnTap"  
+      />
+      <image 
+        class="btn list" 
+        src="/assets/images/players/play_music.png"
+      />
+    </view>
+  </swiper-item>
+  <swiper-item>
+    <!--
+      scroll-top: 设置纵向滚动内容的位置; 
+      scroll-with-animation: 设置滚动内容的动画效果
+    -->
+    <scroll-view 
+      class="lyric-list"
+      scroll-y 
+      scroll-top="{{lyricScrollTop}}"
+      scroll-with-animation
+    >
+      <block wx:for="{{lyricInfo}}" wx:key="time">
+        <!-- 动态的布局操作,使用行内样式布局结构 -->
+        <view 
+          class="item {{currentLyricIndex === index ? 'active' : ''}}"
+          style="padding-top:{{index === 0 ? (contentHeight / 2 - 75) : 0}}px; padding-bottom: {{ index === lyricInfo.length - 1 ? (contentHeight / 2 + 75) : 0}}px;"
+        >
+          {{item.text}}
+        </view>
+      </block>
+    </scroll-view>
+  </swiper-item>
+</swiper>
+
+

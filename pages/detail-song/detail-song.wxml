@@ -1,0 +1,21 @@
+<!--pages/detail-song/detail-song.wxml-->
+<!-- <text>pages/detail-song/detail-song.wxml</text> -->
+
+<!-- 歌单独有的头部 -->
+<!-- 不要提前加载页面的判断 && songInfo.name -->
+<view class="header" wx:if="{{type === 'menu'}}">
+  <menu-header songInfo="{{songInfo}}"></menu-header>
+</view>
+
+<view class="title" wx:if="{{type !== 'menu'}}">{{songInfo.name}}</view>
+<!-- 歌曲列表,给下面的歌曲小块再自定义一个小组件 -->
+<view class="song-list">
+  <block wx:for="{{songInfo.tracks}}" wx:key="id">
+    <song-item-v2 
+      itemData="{{item}}" 
+      index="{{index+1}}"
+      bind:tap="onSongItemTap"
+      data-index="{{index}}"
+    ></song-item-v2>
+  </block>
+</view>

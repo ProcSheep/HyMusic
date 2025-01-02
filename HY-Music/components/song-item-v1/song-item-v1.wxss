@@ -1,0 +1,24 @@
+/* components/song-item-v1/song-item-v1.wxss */
+.song-item{
+  display: flex;
+  padding: 16rpx 0;
+  align-items: center;
+}
+
+.image{
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 16rpx;
+}
+
+.content{
+  padding-left: 15rpx;
+  /* 把左右两侧挤到边边,自己独占中间的剩余位置 */
+  flex: 1;
+}
+
+.content .source{
+  padding-top: 15rpx;
+  font-size: 25rpx;
+  color: #999;
+}

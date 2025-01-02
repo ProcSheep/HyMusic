@@ -1,0 +1,33 @@
+<!--pages/detail-video/detail-video.wxml-->
+<!-- <text>pages/detail-video/detail-video.wxml</text> -->
+<wxs src="/utils/format.wxs" module="format"/>
+
+<!-- 1.video组件 autoplay-->
+<video class="video" src="{{mvUrl}}" referrer-policy="origin"></video>
+
+<!-- 除了视频部分,剩下的为一体 -->
+<scroll-view scroll-y class="content">
+  <view class="info">
+    <view class="mvName">{{mvInfo.name}}</view>
+    <view class="mvInfo">{{mvInfo.artistName}}</view>
+    <view class="mvInfo">{{format.formatCount(mvInfo.playCount)}}播放 {{mvInfo.publishTime}}</view>
+  </view>
+
+  <view class="related-video">
+    <view class="relatedTitle">推荐视频</view>
+    <block wx:for="{{relatedVideo}}" wx:key="artistId">
+      <view class="videoItem">
+        <view class="videoLeft">
+          <image src="{{item.cover}}" mode="widthFix" />
+          <view class="playCount">
+            {{format.formatCount(item.playCount)}}
+          </view>
+        </view>
+        <view class="videoRight">
+          <view class="videoInfo">这个视频挺好看的,快来点击看看吧,记得点赞转发哦 </view>
+          <view class="videoArtist">{{item.artistName}}</view>
+        </view>
+      </view>
+    </block>
+  </view>
+</scroll-view>

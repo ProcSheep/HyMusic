@@ -1,0 +1,16 @@
+<!--components/video-item/video-item.wxml-->
+<!-- 播放量和时间的封装 -->
+<wxs module="fmt" src="/utils/format.wxs"></wxs>
+
+<view class="item" bind:tap="onVideoItem">
+  <view class="album">
+  <!-- widthFix: 缩放模式，宽度不变，高度自动变化，保持原图宽高比不变 -->
+    <image class="image" src="{{itemData.cover}}" mode="widthFix"/>
+    <view class="info">
+    <!-- 视频播放与视频时长 -->
+      <view class="count">{{fmt.formatCount(itemData.playCount)}}</view>
+      <view class="duration">{{fmt.formatTime(itemData.mv.videos[0].duration)}}</view>
+    </view>
+  </view>
+  <view class="content">{{itemData.name}} - {{itemData.artistName}}</view>
+</view>

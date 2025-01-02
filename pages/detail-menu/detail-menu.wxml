@@ -1,0 +1,19 @@
+<!--pages/detail-menu/detail-menu.wxml-->
+<!-- <text>pages/detail-menu/detail-menu.wxml</text> -->
+
+<view class="all-menu">
+  <block wx:for="{{songMenus}}" wx:key="cat">
+    <view class="cat">
+      <area-header title="{{item.cat}}" hasMore="{{false}}"></area-header>
+      <view class="list">
+      <!-- 2个for循环,内部的for循环改一下item名字为data,防止混淆 -->
+        <block wx:for="{{item.playlists}}" wx:key="id" wx:for-item="data">
+            <!-- 复用组件,外层的榜单的单个歌曲组件 -->
+            <view class="list-item">
+              <menu-item itemData="{{data}}"></menu-item>
+            </view>
+        </block>
+      </view>
+    </view>
+  </block>
+</view>

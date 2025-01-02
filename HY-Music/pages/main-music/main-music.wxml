@@ -1,0 +1,66 @@
+<!--pages/main-music/main-music.wxml-->
+<!-- <text>pages/main-music/main-music.wxml</text> -->
+
+<!-- 1.搜索框 -->
+<!-- <van-search value="{{ searchValue }}" shape="round" placeholder="请输入搜索关键词" background="#fafafa" bind:click-input="onSearchClick" /> -->
+
+<!-- 2.轮播图 无限循环+轮播点 -->
+<!-- <swiper class="banner" circular indicator-dots autoplay>
+  <block wx:for="{{banners}}" wx:key="bannerId">
+    <swiper-item class="item">
+      <image class="image" src="{{item.pic}}" mode="widthFix" />
+    </swiper-item>
+  </block>
+</swiper> -->
+
+<!-- 推荐歌曲 -->
+<view class="recommend">
+  <area-header title="推荐歌曲" bind:moreclick="onRecommendMoreClick"></area-header>
+  <view class="list">
+    <block wx:for="{{recommendSongs}}" wx:key="id">
+      <song-item-v1 itemData="{{item}}" data-index="{{index}}" bind:tap="onSongItemClick"></song-item-v1>
+    </block>
+  </view>
+</view>
+
+<!-- 热门歌单 -->
+<!-- <view class="hot-menu">
+  <area-header title="热门歌单"></area-header>
+  <scroll-view scroll-x class="list" style="width:{{screenWidth}}px">
+    <block wx:for="{{hotMenuList}}" wx:key="id">
+      <view class="item">
+        <menu-item itemData="{{item}}"></menu-item>
+      </view>
+    </block>
+  </scroll-view>
+</view> -->
+
+<!-- 华语歌单 -->
+<!-- <view class="hot-menu">
+  <area-header title="华语歌单"></area-header>
+  <scroll-view scroll-x class="list" style="width:{{screenWidth}}px">
+    <block wx:for="{{recMenuList}}" wx:key="id">
+      <view class="item">
+        <menu-item itemData="{{item}}"></menu-item>
+      </view>
+    </block>
+  </scroll-view>
+</view> -->
+
+<!-- 不同的榜单,标题title和内容menuList不同 -->
+<menu-area title="热门歌单" menuList="{{hotMenuList}}"></menu-area>
+<!-- <menu-area title="推荐歌单" menuList="{{recMenuList}}"></menu-area> -->
+
+
+
+<!-- 巅峰榜 -->
+<view class="ranking">
+  <area-header title="巅峰榜" hasMore="{{false}}"></area-header>
+  <view class="ranking-list">
+    <!-- wx:for遍历对象: index对应key(不再是数组索引),item对应value -->
+    <block wx:for="{{rankingInfo}}" wx:key="id">
+      <!-- 巅峰榜单个榜单展示的组件 -->
+      <!-- <ranking-item itemData="{{item}}" key="{{index}}"></ranking-item> -->
+    </block>
+  </view>
+</view>

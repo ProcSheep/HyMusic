@@ -1,0 +1,14 @@
+<!--components/menu-item/menu-item.wxml-->
+<!-- <text>components/menu-item/menu-item.wxml</text> -->
+<wxs src="/utils/format.wxs" module="format"/>
+
+<!-- 添加监听点击事件 -->
+<view class="menu-item" bind:tap="onMenuItemClick">
+  <view class="top">
+    <image class="image" src="{{itemData.coverImgUrl}}" mode="widthFix" />
+    <view class="count">{{format.formatCount(itemData.playCount)}}</view>
+  </view>
+  <view class="bottom">
+    {{itemData.name}}
+  </view>
+</view>

@@ -1,0 +1,13 @@
+/* pages/main-video/main-video.wxss */
+/* 在wxml结构中,组件的根组件不是最外层元素,而是video-item,再里面才是组件的整体内容 */
+/* 所以控制组件的样式,最好给video-item设置class值(video-item),设置好他的样式,框好一个视频的范围,内部组件默认填充和另外的设置即可 */
+.video-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 0 10rpx;
+}
+
+.video-list .video-item {
+  width: 48%;
+}

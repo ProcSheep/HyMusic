@@ -1,0 +1,31 @@
+<!--components/nav-bar/nav-bar.wxml-->
+<!-- <text>components/nav-bar/nav-bar.wxml</text> -->
+
+<!-- 自定义导航栏(默认的导航栏在json文件中取消) -->
+<view class="navBar">
+  <!-- 状态栏的高度看情况动态变化,因为有的手机iphone有顶部黑框 -->
+  <view class="statue" style="height: {{statusHeight}}px;"></view>
+  <view class="nav">
+    <view class="left" bind:tap="onLeftTap">
+      <view class="slot">
+      <!-- 多个插槽需要name区分,还需要options中开启多插槽功能 -->
+        <slot name="left"></slot>
+      </view>
+      <view class="default">
+        <image class="icon" src="/assets/images/icons/arrow-left.png"></image>
+      </view>
+    </view>
+    <view class="center">
+      <!-- 插槽,自定义标题 -->
+      <view class="slot">
+        <slot name="center"></slot>
+      </view>
+      <!-- 默认的标题 -->
+      <view class="default">
+        {{title}}
+      </view>
+    </view>
+    <!-- 小程序右侧有按钮,一般不放东西 -->
+    <view class="right"></view>
+  </view>
+</view>
